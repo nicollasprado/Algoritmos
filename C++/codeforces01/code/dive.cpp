@@ -31,7 +31,7 @@ int main(){
     }else{
         for(int p=0; p<=(volunteers-returnedVolunteers)-1; p++){
             if(p == (volunteers-returnedVolunteers)-1){
-                std::cout << notReturnedIds[p] << std::endl;
+                std::cout << notReturnedIds[p] << " " << std::endl;
             }else{
                 std::cout << notReturnedIds[p] << " ";
             }

@@ -1,16 +1,5 @@
 #include <iostream>
 
-// Correção automatica de indexes para não somar um valor a ele mesmo
-int indexJcorrection(int indexN, int indexJ, int arraySize){
-    if(indexN == indexJ){
-        indexJ++;
-    }
-    if(indexJ == arraySize+1){
-        indexJ = 0;
-    }
-    return indexJ;
-}
-
 int main(){
     int arraySize, sumToFind, auxInt;
     std::cin >> arraySize >> sumToFind;
@@ -20,13 +9,11 @@ int main(){
         std::cin >> auxInt;
         nums[i] = auxInt;
     }
-    int indexN = 0, indexJ = 1;
     bool foundS = false;
     // Verifica se alguma soma resulta em "sumToFind"
-    for(int n=0; n <= arraySize; n++){
-        for(int j=1; j <= arraySize; j++){
-            indexJ = indexJcorrection(indexN, indexJ, arraySize);
-            if(nums[n] + nums[j] == sumToFind){
+    for(int n=0; n <= arraySize-1; n++){
+        for(int j=0; j <= arraySize-1; j++){
+            if(nums[n] + nums[j] == sumToFind && n != j){
                 foundS = true;
                 break;
             }
