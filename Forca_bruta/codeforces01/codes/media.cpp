@@ -2,20 +2,12 @@
 #include <iomanip>
 #include <vector>
 
-int fat(int num){
-    int factorial = 1;
-    for(int i=2; i <= num; i++){
-        factorial = factorial * i;
-    }
-    return factorial;
-}
-
 int partition(double *a, int left, int right){
     double pivot = a[right]; // pivot vai ser o ultimo valor do array
     int i = left - 1; // i não deve começar no 0
 
     for(int j=left; j < right; j++){
-        if(a[j] <= pivot){ // se J for menor que o pivot, soma i e inverte os valores de i e j
+        if(a[j] >= pivot){ // se J for menor que o pivot, soma i e inverte os valores de i e j
             i++;
             double aux = a[i];
             a[i] = a[j];
@@ -38,15 +30,6 @@ void quickSort(double *a, int left, int right){
     }
 }
 
-void reverse(double *a, int arraySize){
-    int j = arraySize-1;
-    for(int i=0; i < arraySize/2; i++){
-        double aux = a[j];
-        a[j] = a[i];
-        a[i] = aux;
-        j--;
-    }
-}
 
 int main(){
     int qtTests, chosenAvg;
@@ -58,7 +41,7 @@ int main(){
             std::cin >> testsRes[j];
         }
         // testes divididos 3 em 3 -> Combinação sem repetição
-        int qtSubgroups = fat(qtTests) / (fat(3) * fat(qtTests - 3));
+        int qtSubgroups = ((qtTests * (qtTests-1)) * (qtTests-2)) / 6;
         double averages[qtSubgroups];
         int avgsIndex = 0;
         // Geração das médias
@@ -71,8 +54,9 @@ int main(){
             }
         }
 
-        quickSort(averages, 0, qtSubgroups-1); // Ordenará do menor pro maior o array das médias
-        reverse(averages, qtSubgroups); // Inverte o arr
+        if(qtSubgroups > 1){
+            quickSort(averages, 0, qtSubgroups-1); // Ordenará de forma decrescente o array das médias
+        }
         results.push_back(averages[chosenAvg-1]);
         qtResults++;
     }
