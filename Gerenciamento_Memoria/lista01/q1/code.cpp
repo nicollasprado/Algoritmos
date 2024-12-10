@@ -5,7 +5,7 @@
 
 
 int * increase_capacity(int * data, int &capacity, int &size){
-    int* new_array = new int[capacity+10];
+    int* new_array = new int[capacity*2];
     for (int i=0 ; i<size ; ++i)
     new_array[i] = data[i];
     int* old_array = data;
@@ -22,17 +22,15 @@ int *push_back(int * data, int &capacity, int &size, int value){
 }
 
 int main(){
-    int *data, size=0, capacity=10, qtTest=100;
+    int *data, size=0, capacity=10;
     auto beg = std::chrono::high_resolution_clock::now();
     data = new int[capacity];
 
     std::ifstream testFile("testsFiles/teste-01.txt");
+    std::string line;
     
-    for(int x=0; x < qtTest; x++){
-        std::string line;
-        std::getline(testFile, line);
+    while(std::getline(testFile, line) && line != "-1"){
         data = push_back(data, capacity, size, stoi(line));
-        std::cout << "buffer= " << line << std::endl;
         line = "";
     }
 
