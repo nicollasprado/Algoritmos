@@ -5,12 +5,12 @@
 
 
 int * increase_capacity(int * data, int &capacity, int &size){
-    int* new_array = new int[capacity*2];
+    int* new_array = new int[capacity+100];
     for (int i=0 ; i<size ; ++i)
     new_array[i] = data[i];
     int* old_array = data;
     delete [] old_array;
-    capacity = capacity+10;
+    capacity = capacity+100;
     return new_array;
 }
 
@@ -26,7 +26,7 @@ int main(){
     auto beg = std::chrono::high_resolution_clock::now();
     data = new int[capacity];
 
-    std::ifstream testFile("testsFiles/teste-01.txt");
+    std::ifstream testFile("testsFiles/teste-10.txt");
     std::string line;
     
     while(std::getline(testFile, line) && line != "-1"){
